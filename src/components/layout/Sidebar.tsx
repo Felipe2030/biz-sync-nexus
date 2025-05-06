@@ -111,7 +111,7 @@ const Sidebar = () => {
           className="flex items-center px-3 py-3 text-white/70 hover:bg-white/10 hover:text-white rounded-md transition-colors"
         >
           <Lock size={20} className="shrink-0" />
-          {!collapsed && <span className="ml-3">{t("admin_login")}</span>}
+          {!collapsed && <span className="ml-3">{t("logout")}</span>}
         </Link>
       </div>
     </div>
