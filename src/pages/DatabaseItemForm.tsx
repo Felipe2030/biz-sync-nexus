@@ -32,31 +32,31 @@ const INITIAL_PRODUCTS = [
   { 
     id: '1', 
     name: 'Standard Consultation', 
-    type: 'service', 
+    type: 'service' as const, 
     category: 'Consulting',
     price: 150.00,
     description: '1-hour consultation with a specialist',
-    status: 'active',
+    status: 'active' as const,
     tags: ['consulting', 'professional']
   },
   { 
     id: '2', 
     name: 'Website Development - Basic', 
-    type: 'service', 
+    type: 'service' as const, 
     category: 'Development',
     price: 1500.00,
     description: 'Basic website development package',
-    status: 'active',
+    status: 'active' as const,
     tags: ['web', 'development']
   },
   { 
     id: '3', 
     name: 'Business Analytics Report', 
-    type: 'product', 
+    type: 'product' as const, 
     category: 'Reports',
     price: 299.00,
     description: 'Comprehensive business analytics report',
-    status: 'active',
+    status: 'active' as const,
     tags: ['report', 'analytics']
   },
 ];
@@ -71,6 +71,8 @@ const productSchema = z.object({
 });
 
 type ProductFormValues = z.infer<typeof productSchema>;
+type ProductType = "product" | "service";
+type ProductStatus = "active" | "inactive" | "draft";
 
 const DatabaseItemForm = () => {
   const { id } = useParams();
@@ -102,7 +104,7 @@ const DatabaseItemForm = () => {
           type: product.type,
           category: product.category,
           price: product.price,
-          description: product.description,
+          description: product.description || "",
           status: product.status,
         });
         setTags(product.tags || []);
@@ -212,7 +214,7 @@ const DatabaseItemForm = () => {
                     <FormItem>
                       <FormLabel>Type</FormLabel>
                       <Select 
-                        onValueChange={field.onChange} 
+                        onValueChange={(value: ProductType) => field.onChange(value)} 
                         defaultValue={field.value}
                       >
                         <FormControl>
@@ -286,7 +288,10 @@ const DatabaseItemForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Status</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select 
+                        onValueChange={(value: ProductStatus) => field.onChange(value)} 
+                        defaultValue={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Select status" />
