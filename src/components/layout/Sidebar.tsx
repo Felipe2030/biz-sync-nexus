@@ -29,7 +29,7 @@ const Sidebar = () => {
     { 
       name: t("dashboard"), 
       icon: Home, 
-      path: '/',
+      path: '/dashboard',
       active: true
     },
     { 

@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -24,6 +25,7 @@ const AdminLogin = () => {
   const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -48,8 +50,9 @@ const AdminLogin = () => {
         title: "Success",
         description: "Login successful",
       });
-      // In a real application, you would redirect to an admin dashboard
-      // and store authentication tokens
+      
+      // Redirect to dashboard
+      navigate('/dashboard');
     } else {
       toast({
         title: "Error",
