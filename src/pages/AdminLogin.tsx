@@ -63,14 +63,14 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md">
+    <div className="h-screen flex items-center justify-center bg-mobserv-blue">
+      <Card className="w-full max-w-md bg-mobserv-blue-light border-mobserv-blue">
         <CardHeader className="space-y-1 flex flex-col items-center">
           <div className="w-48 mb-6">
             <AppLogo collapsed={false} />
           </div>
-          <CardTitle className="text-2xl">{t("admin_area")}</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl text-white">{t("admin_area")}</CardTitle>
+          <CardDescription className="text-gray-300">
             {t("login")}
           </CardDescription>
         </CardHeader>
@@ -82,15 +82,16 @@ const AdminLogin = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("email")}</FormLabel>
+                    <FormLabel className="text-gray-300">{t("email")}</FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="admin@mobserv.com" 
                         {...field}
                         disabled={loading}
+                        className="bg-white/10 text-white border-white/20 placeholder:text-gray-400"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-red-300" />
                   </FormItem>
                 )}
               />
@@ -99,22 +100,23 @@ const AdminLogin = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("password")}</FormLabel>
+                    <FormLabel className="text-gray-300">{t("password")}</FormLabel>
                     <FormControl>
                       <Input 
                         type="password" 
                         placeholder="••••••" 
                         {...field}
                         disabled={loading}
+                        className="bg-white/10 text-white border-white/20 placeholder:text-gray-400"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-red-300" />
                   </FormItem>
                 )}
               />
               <Button 
                 type="submit" 
-                className="w-full bg-mobserv-blue" 
+                className="w-full bg-white text-mobserv-blue hover:bg-gray-200" 
                 disabled={loading}
               >
                 {loading ? "Loading..." : t("sign_in")}
@@ -123,7 +125,7 @@ const AdminLogin = () => {
           </Form>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <Button variant="link">
+          <Button variant="link" className="text-gray-300 hover:text-white">
             {t("forgot_password")}
           </Button>
         </CardFooter>
