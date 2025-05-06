@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import AppLogo from './AppLogo';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   BarChart2,
   Users,
@@ -12,49 +13,51 @@ import {
   Database,
   ChevronLeft,
   ChevronRight,
-  Home
+  Home,
+  Lock
 } from 'lucide-react';
-
-const menuItems = [
-  { 
-    name: 'Dashboard', 
-    icon: Home, 
-    path: '/',
-    active: true
-  },
-  { 
-    name: 'Analytics', 
-    icon: BarChart2, 
-    path: '/analytics'
-  },
-  { 
-    name: 'Clients', 
-    icon: Users, 
-    path: '/clients' 
-  },
-  { 
-    name: 'Finances', 
-    icon: Wallet, 
-    path: '/finances' 
-  },
-  { 
-    name: 'Schedule', 
-    icon: Calendar, 
-    path: '/schedule' 
-  },
-  { 
-    name: 'Database', 
-    icon: Database, 
-    path: '/database' 
-  },
-];
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const { t } = useLanguage();
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
   };
+
+  const menuItems = [
+    { 
+      name: t("dashboard"), 
+      icon: Home, 
+      path: '/',
+      active: true
+    },
+    { 
+      name: t("analytics"), 
+      icon: BarChart2, 
+      path: '/analytics'
+    },
+    { 
+      name: t("clients"), 
+      icon: Users, 
+      path: '/clients' 
+    },
+    { 
+      name: t("finances"), 
+      icon: Wallet, 
+      path: '/finances' 
+    },
+    { 
+      name: t("schedule"), 
+      icon: Calendar, 
+      path: '/schedule' 
+    },
+    { 
+      name: t("database"), 
+      icon: Database, 
+      path: '/database' 
+    },
+  ];
 
   return (
     <div
@@ -94,13 +97,21 @@ const Sidebar = () => {
         </ul>
       </nav>
 
-      <div className="p-4 border-t border-white/10">
+      <div className="p-4 border-t border-white/10 space-y-1">
         <Link
           to="/settings"
           className="flex items-center px-3 py-3 text-white/70 hover:bg-white/10 hover:text-white rounded-md transition-colors"
         >
           <Settings size={20} className="shrink-0" />
-          {!collapsed && <span className="ml-3">Settings</span>}
+          {!collapsed && <span className="ml-3">{t("settings")}</span>}
+        </Link>
+        
+        <Link
+          to="/admin/login"
+          className="flex items-center px-3 py-3 text-white/70 hover:bg-white/10 hover:text-white rounded-md transition-colors"
+        >
+          <Lock size={20} className="shrink-0" />
+          {!collapsed && <span className="ml-3">{t("admin_login")}</span>}
         </Link>
       </div>
     </div>
